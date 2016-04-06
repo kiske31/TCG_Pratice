@@ -1,25 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LobbyUi : MonoBehaviour
+public class LobbyUi : MonoBehaviour 
 {
-    void StartGameButton()
+	public void GameExit () 
     {
-
-    }
-
-    void ExitGameButton()
-    {
-
-    }
-
-    void ScoreButton()
-    {
-
-    }
-
-    void CreditButton()
-    {
-
-    }
+        Application.Quit();
+	}
 }

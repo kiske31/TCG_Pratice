@@ -24,7 +24,6 @@ public class SceneManager : MonoBehaviour
 
     public void ChangeScene(int sceneNum)
     {
-        Debug.Log(sceneNum);
         Application.LoadLevel(sceneNum);
     }
 }
