@@ -1,15 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SceneManager : MonoBehaviour {
+public class SceneManager : MonoBehaviour 
+{
+    private static SceneManager instance;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public static SceneManager getInstance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new SceneManager();
+            }
+            return instance;
+        }
+    }
+
+    void Start()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
+    public void ChangeScene(int sceneNum)
+    {
+        Debug.Log(sceneNum);
+        Application.LoadLevel(sceneNum);
+    }
 }
