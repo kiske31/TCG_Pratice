@@ -5,6 +5,7 @@ public class SceneManager : MonoBehaviour
 {
     private static SceneManager instance;
 
+    
     public static SceneManager Instance
     {
         get
