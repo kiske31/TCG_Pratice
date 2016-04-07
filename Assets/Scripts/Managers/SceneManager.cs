@@ -5,7 +5,7 @@ public class SceneManager : MonoBehaviour
 {
     private static SceneManager instance;
 
-    public static SceneManager getInstance
+    public static SceneManager Instance
     {
         get
         {
@@ -17,7 +17,7 @@ public class SceneManager : MonoBehaviour
         }
     }
 
-    void Start()
+    void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
     }

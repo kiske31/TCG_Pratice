@@ -7,4 +7,9 @@ public class LobbyUi : MonoBehaviour
     {
         Application.Quit();
 	}
+    
+    public void ChangeScene(int sceneNum)
+    {
+        SceneManager.Instance.ChangeScene(sceneNum);
+    }
 }

@@ -45,9 +45,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\MainGame.cs" />
      <Compile Include="Assets\Scripts\Managers\SaveDataManager.cs" />
      <Compile Include="Assets\Scripts\Managers\SceneManager.cs" />
+     <Compile Include="Assets\Scripts\UI\InGameUi.cs" />
      <Compile Include="Assets\Scripts\UI\LobbyUi.cs" />
+     <Compile Include="Assets\Scripts\UI\ScoreTextUi.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

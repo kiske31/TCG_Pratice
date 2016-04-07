@@ -14,7 +14,7 @@ public class SaveDataManager : MonoBehaviour
 
     Dictionary<int, string> HashKeyList = new Dictionary<int,string>();
 
-    public static SaveDataManager getInstance
+    public static SaveDataManager Instance
     {
         get
         {
@@ -69,8 +69,10 @@ public class SaveDataManager : MonoBehaviour
         PlayerPrefs.SetInt(HashKey, Value);
     }
 
-    public int LoadData(string HashKey)
+    public int LoadData(int i)
     {
-        return PlayerPrefs.GetInt(HashKey);
+        string temp;
+        HashKeyList.TryGetValue(i, out temp);
+        return PlayerPrefs.GetInt(temp);
     }
 }
