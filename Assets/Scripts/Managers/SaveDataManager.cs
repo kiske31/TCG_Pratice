@@ -22,12 +22,23 @@ public class SaveDataManager : MonoBehaviour
            {
                 instance = new SaveDataManager();
            }
-        return instance;
+            if (instance == null)
+            {
+                GameObject obj = new GameObject("SaveDataManager");
+                instance = obj.AddComponent(typeof(SaveDataManager)) as SaveDataManager;
+            }
+            return instance;
         }
     }
 
     void Awake()
     {
+        if (instance != null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
         DontDestroyOnLoad(this.gameObject);
 
         Init();

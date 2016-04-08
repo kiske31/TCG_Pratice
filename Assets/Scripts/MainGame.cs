@@ -19,7 +19,7 @@ public class MainGame : MonoBehaviour
 
     void Update()
     {
-      
+        // Timer();
     }
 
     void Timer()

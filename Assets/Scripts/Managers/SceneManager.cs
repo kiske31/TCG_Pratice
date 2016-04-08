@@ -14,12 +14,23 @@ public class SceneManager : MonoBehaviour
             {
                 instance = new SceneManager();
             }
+            if (instance == null)
+            {
+                GameObject obj = new GameObject("SceneManager");
+                instance = obj.AddComponent(typeof(SceneManager)) as SceneManager;
+            }
             return instance;
         }
     }
 
     void Awake()
     {
+        if (instance != null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
         DontDestroyOnLoad(this.gameObject);
     }
 
