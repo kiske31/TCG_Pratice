@@ -48,6 +48,7 @@
      <Compile Include="Assets\Scripts\CsvParser.cs" />
      <Compile Include="Assets\Scripts\MainGame.cs" />
      <Compile Include="Assets\Scripts\Managers\CardManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\DeckManager.cs" />
      <Compile Include="Assets\Scripts\Managers\SaveDataManager.cs" />
      <Compile Include="Assets\Scripts\Managers\SceneManager.cs" />
      <Compile Include="Assets\Scripts\UI\InGameUi.cs" />
