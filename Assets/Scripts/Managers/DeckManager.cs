@@ -41,6 +41,7 @@ public class DeckManager : MonoBehaviour {
             }
         }
     }
+    
 
     void StartDeckSetting(Dictionary<int, Card> Deck) // 36장의 카드중 랜덤으로 카드를 1장씩 얻어 랜덤 셔플된 30장의 덱을 구성한다.
     {
