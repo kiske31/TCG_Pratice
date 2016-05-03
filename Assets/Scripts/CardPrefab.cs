@@ -12,8 +12,8 @@ public enum CardState
     GraveYard // 무덤으로 간 상태
 }
 
-public class CardPrefab : MonoBehaviour {
-    
+public class CardPrefab : MonoBehaviour
+{
     public MeshRenderer CardFront;
     public MeshRenderer CardPhoto;
     public Text CardCost;
@@ -21,7 +21,8 @@ public class CardPrefab : MonoBehaviour {
     public Text CardHp;
     public Text CardName;
     public Text CardDesc;
-
+    public GameObject cardXmark;
+    
     public int id;     // 카드 아이디
     public int atk;    // 카드 공격력
     public int hp;     // 카드 에너지
@@ -34,7 +35,6 @@ public class CardPrefab : MonoBehaviour {
     public void PrefabSetting(int id)
     {
         // 카드 프리펩 세팅
-
         Card newCard = CardManager.Instance.CardList[id];
         
         if (newCard.legendary)
@@ -71,7 +71,6 @@ public class CardPrefab : MonoBehaviour {
         CardCost.text = newCard.mana.ToString();
 
         // 카드 수치 세팅
-
         this.id = newCard.id;
         type = newCard.type;
         value = newCard.ability;

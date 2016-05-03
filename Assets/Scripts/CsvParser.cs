@@ -2,9 +2,6 @@
 using System.IO;
 using System.Collections;
 
-
-
-
 public class CsvParser : MonoBehaviour 
 {
     TextAsset dataText;

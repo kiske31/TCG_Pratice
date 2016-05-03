@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class DeckManager : MonoBehaviour
 {
+    int num = 0;
     // 데이터로 존재하는 60 장의 카드가 딕셔너리에 담긴다. 프리펩은 필요 없다.
     Dictionary<int, Card> choaDeck = new Dictionary<int, Card>(); // 초아의 덱 (max 30)
     Dictionary<int, Card> uhmDeck = new Dictionary<int, Card>(); // 엄갓의 덱 (max 30)
@@ -132,19 +133,20 @@ public class DeckManager : MonoBehaviour
                 choaDeck.Remove(changeNum);
 
                 choaHand[i].PrefabSetting(changeCard.id);
+                choaHand[i].cardXmark.SetActive(false);
 
                 choaDeck.Add(i, changeCard);
                 choaDeck.Add(changeNum, tempCard);
             }
         }
-
-        if (choaHadnCount == 4)
-        {
-            choaHandCard[4].SetActive(true);
-            choaHandCard[4].transform.position = new Vector3(6 - (4 * 4), 0, -1);
-            choaHand[4].PrefabSetting(37);
-            choaHand[4].DeckManagerLink(this);
-        }
+        
+        // if (choaHadnCount == 4)
+        // {
+        //     choaHandCard[4].SetActive(true);
+        //     choaHandCard[4].transform.position = new Vector3(6 - (4 * 4), 0, -1);
+        //     choaHand[4].PrefabSetting(37);
+        //     choaHand[4].DeckManagerLink(this);
+        // }
     }
 
     // Update is called once per frame
@@ -183,6 +185,16 @@ public class DeckManager : MonoBehaviour
 
     public void TestCard()
     {
-
+        switch (num)
+        {
+            case 0:
+                StartMulligun();
+                num++;
+                break;
+            case 1:
+                cardExchange();
+                num++;
+                break;
+        }
     }
 }

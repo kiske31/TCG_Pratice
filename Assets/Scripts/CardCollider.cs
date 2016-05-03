@@ -15,6 +15,12 @@ public class CardCollider : MonoBehaviour
         if (cardPrefab.state == CardState.Mulligun)
         {
             cardPrefab.state = CardState.Change;
+            cardPrefab.cardXmark.SetActive(true);
+        }
+        else if (cardPrefab.state == CardState.Change)
+        {
+            cardPrefab.state = CardState.Mulligun;
+            cardPrefab.cardXmark.SetActive(false);
         }
         else if (cardPrefab.state == CardState.Hand)
         {
