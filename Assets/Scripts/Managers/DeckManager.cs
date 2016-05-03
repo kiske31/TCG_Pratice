@@ -2,59 +2,60 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class DeckManager : MonoBehaviour {
+public class DeckManager : MonoBehaviour
+{
+    int num = 0;
 
-    bool strat = false;
-    public CardPrefab testCard;
-    Dictionary<int, Card> choaDeck = new Dictionary<int, Card>(); // 초아의 덱
-    Dictionary<int, Card> uhmDeck = new Dictionary<int, Card>(); // 엄갓의 덱
-    List<int> choaHand = new List<int>(); // 초아의 손패
-    List<int> uhmHand = new List<int>(); // 엄갓의 손패
-    List<int> graveyard = new List<int>(); // 무덤 리스트
+    // 데이터로 존재하는 60 장의 카드가 딕셔너리에 담긴다. 프리펩은 필요 없다.
+    Dictionary<int, Card> choaDeck = new Dictionary<int, Card>(); // 초아의 덱 (max 30)
+    Dictionary<int, Card> uhmDeck = new Dictionary<int, Card>(); // 엄갓의 덱 (max 30)
 
-    // Use this for initialization
+    // 최대 34장의 프리펩이 필요
+    List<CardPrefab> choaHand = new List<CardPrefab>(); // 초아의 손패 (max 10)
+    List<CardPrefab> uhmHand = new List<CardPrefab>(); // 엄갓의 손패 (max 10)
+    List<CardPrefab> choaField = new List<CardPrefab>(); // 초아의 필드 (max 7)
+    List<CardPrefab> uhmField = new List<CardPrefab>(); // 엄갓의 필드 (max 7)
+
+    // 카드 아이디 값만 저장하는 데이터 리스트 프리펩은 필요 없다.
+    List<int> graveyard = new List<int>(); // 무덤 리스트 (max infinity)
+
+    public GameObject[] card;
+
+    public GameObject prefab;
+
     void Awake ()
     {
+        StartDeckSetting(choaDeck);
+        StartDeckSetting(uhmDeck);
         
+       for (int i = 0; i < 36; i++)
+       {
+           card[i] = (GameObject)Instantiate(prefab, Vector3.zero, Quaternion.identity);
+           card[i].name = "Card_" + i;
+           card[i].transform.parent = this.gameObject.transform;
+           card[i].SetActive(false);
+           CardPrefab cardPrefab = card[i].GetComponent<CardPrefab>();
+       
+           if (i < 18)
+           {
+               cardPrefab.PrefabSetting(choaDeck[i].id);
+               choaHand.Add(cardPrefab);
+           }
+           else
+           {
+               cardPrefab.PrefabSetting(uhmDeck[i - 18].id);
+               choaHand.Add(cardPrefab);
+           }
+       }
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            TestCard();
-        }
-        if (Input.GetKeyDown(KeyCode.A)) // 디버그로 카드가 잘 섞였는지 확인
-        {
-            StartDeckSetting(choaDeck);
-            StartDeckSetting(uhmDeck);
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-
-            testCard.PrefabSetting(choaDeck[0].id);
-
-            // for (int i = 0; i < 30; i++)
-            // {
-            //     Debug.Log(choaDeck[i].name);
-            // }
-        }
-
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            testCard.PrefabSetting(uhmDeck[0].id);
-
-            // for (int i = 0; i < 30; i++)
-            // {
-            //     Debug.Log(uhmDeck[i].name);
-            // }
-        }
     }
-    
 
-    void StartDeckSetting(Dictionary<int, Card> Deck) // 36장의 카드중 랜덤으로 카드를 1장씩 얻어 랜덤 셔플된 30장의 덱을 구성한다.
+    // 35장의 카드중 랜덤으로 카드를 1장씩 얻어 랜덤 셔플된 30장의 덱을 구성한다.
+    void StartDeckSetting(Dictionary<int, Card> Deck) 
     {
         for (int i = 0; i < 30; i++) 
         {
@@ -73,12 +74,16 @@ public class DeckManager : MonoBehaviour {
 
     public void TestCard()
     {
-        int randNum = Random.Range(0, 30);
-        if (!strat)
+        if (num > 0)
         {
-            StartDeckSetting(choaDeck);
-            strat = true;
+            card[num - 1].SetActive(false);
         }
-        testCard.PrefabSetting(choaDeck[randNum].id);
+        card[num].SetActive(true);
+        num++;
+        if (num > 35)
+        {
+            card[35].SetActive(false);
+            num = 0;
+        }
     }
 }
