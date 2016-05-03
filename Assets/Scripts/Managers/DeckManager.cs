@@ -18,40 +18,72 @@ public class DeckManager : MonoBehaviour
 
     // 카드 아이디 값만 저장하는 데이터 리스트 프리펩은 필요 없다.
     List<int> graveyard = new List<int>(); // 무덤 리스트 (max infinity)
+    
+    public GameObject[] choaHandCard; // 카드 오브젝트 배열들
+    public GameObject[] choaFieldCard;
+    public GameObject[] uhmHandCard;
+    public GameObject[] uhmFieldCard;
 
-    public GameObject[] card;
-
-    public GameObject prefab;
+    public GameObject prefab; // 기본 카드 프리펩
+    public GameObject choaFieldObj; // 카드들의 Root가 될 빈 게임 오브젝트 
+    public GameObject uhmFieldObj; 
+    public GameObject choaHandObj; 
+    public GameObject uhmHandObj;  
 
     void Awake ()
     {
         StartDeckSetting(choaDeck);
         StartDeckSetting(uhmDeck);
+
+        for (int i = 0; i < 10; i++)
+        {
+            choaHandCard[i] = (GameObject)Instantiate(prefab, Vector3.zero, Quaternion.identity);
+            choaHandCard[i].name = "ChoaHandCard_" + i;
+            choaHandCard[i].transform.parent = choaHandObj.transform;
+            choaHandCard[i].SetActive(false);
+
+            CardPrefab cardPrefab = choaHandCard[i].GetComponent<CardPrefab>();
+            choaHand.Add(cardPrefab);
+        }
+
+        for (int i = 0; i < 10; i++)
+        {
+            uhmHandCard[i] = (GameObject)Instantiate(prefab, Vector3.zero, Quaternion.identity);
+            uhmHandCard[i].name = "UhmHandCard_" + i;
+            uhmHandCard[i].transform.parent = uhmHandObj.transform;
+            uhmHandCard[i].SetActive(false);
+
+            CardPrefab cardPrefab = uhmHandCard[i].GetComponent<CardPrefab>();
+            uhmHand.Add(cardPrefab);
+        }
         
-       for (int i = 0; i < 36; i++)
-       {
-           card[i] = (GameObject)Instantiate(prefab, Vector3.zero, Quaternion.identity);
-           card[i].name = "Card_" + i;
-           card[i].transform.parent = this.gameObject.transform;
-           card[i].SetActive(false);
-           CardPrefab cardPrefab = card[i].GetComponent<CardPrefab>();
-       
-           if (i < 18)
-           {
-               cardPrefab.PrefabSetting(choaDeck[i].id);
-               choaHand.Add(cardPrefab);
-           }
-           else
-           {
-               cardPrefab.PrefabSetting(uhmDeck[i - 18].id);
-               choaHand.Add(cardPrefab);
-           }
-       }
+        for (int i = 0; i < 7; i++)
+        {
+            choaFieldCard[i] = (GameObject)Instantiate(prefab, Vector3.zero, Quaternion.identity);
+            choaFieldCard[i].name = "ChoaFieldCard_" + i;
+            choaFieldCard[i].transform.parent = choaFieldObj.transform;
+            choaFieldCard[i].SetActive(false);
+
+            CardPrefab cardPrefab = choaFieldCard[i].GetComponent<CardPrefab>();
+            choaField.Add(cardPrefab);
+        }
+
+        for (int i = 0; i < 7; i++)
+        {
+            uhmFieldCard[i] = (GameObject)Instantiate(prefab, Vector3.zero, Quaternion.identity);
+            uhmFieldCard[i].name = "UhmFieldCard_" + i;
+            uhmFieldCard[i].transform.parent = uhmFieldObj.transform;
+            uhmFieldCard[i].SetActive(false);
+
+            CardPrefab cardPrefab = uhmFieldCard[i].GetComponent<CardPrefab>();
+            uhmField.Add(cardPrefab);
+        }
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
+
     }
 
     // 35장의 카드중 랜덤으로 카드를 1장씩 얻어 랜덤 셔플된 30장의 덱을 구성한다.
@@ -74,16 +106,24 @@ public class DeckManager : MonoBehaviour
 
     public void TestCard()
     {
-        if (num > 0)
+        for (int i = 0; i < 10; i++)
         {
-            card[num - 1].SetActive(false);
+            choaHandCard[i].SetActive(true);
+            choaHandCard[i].transform.position = new Vector3(7.5f - (1.7f * i), 0, 2.5f);
+            choaHand[i].PrefabSetting(choaDeck[i].id);
         }
-        card[num].SetActive(true);
-        num++;
-        if (num > 35)
+
+        for (int i = 0; i < 10; i++)
         {
-            card[35].SetActive(false);
-            num = 0;
+            uhmHandCard[i].SetActive(true);
+            uhmHandCard[i].transform.position = new Vector3(8.0f - i, 0.2f, -5.5f);
+            uhmHandCard[i].transform.rotation = Quaternion.Euler(0, 0, 180);
+            uhmHand[i].PrefabSetting(uhmDeck[i].id);
         }
+    }
+
+    public void sad()
+    {
+
     }
 }

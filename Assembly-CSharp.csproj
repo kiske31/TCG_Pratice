@@ -47,6 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\CardPrefab.cs" />
      <Compile Include="Assets\Scripts\CsvParser.cs" />
+     <Compile Include="Assets\Scripts\HandCollider.cs" />
      <Compile Include="Assets\Scripts\MainGame.cs" />
      <Compile Include="Assets\Scripts\Managers\CardManager.cs" />
      <Compile Include="Assets\Scripts\Managers\DeckManager.cs" />
