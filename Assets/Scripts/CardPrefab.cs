@@ -2,6 +2,16 @@
 using System.Collections;
 using UnityEngine.UI;
 
+public enum CardState
+{
+    None = 0, // 노멀 상태
+    Mulligun, // 멀리건 상태
+    Change, // 멀리건 예정인 카드 상태
+    Hand, // 손패 상태
+    Field, // 필드에 나간 상태
+    GraveYard // 무덤으로 간 상태
+}
+
 public class CardPrefab : MonoBehaviour {
     
     public MeshRenderer CardFront;
@@ -18,7 +28,9 @@ public class CardPrefab : MonoBehaviour {
     public int type;   // 카드 타입
     public int value;  // 카드 특수 능력 밸류
     public int cost;   // 카드 마나 코스트
-    
+    public DeckManager deckManager; // 콜라이더에서 접근하려고 가지고 있을 필요가 있네.
+    public CardState state;
+
     public void PrefabSetting(int id)
     {
         // 카드 프리펩 세팅
@@ -66,6 +78,12 @@ public class CardPrefab : MonoBehaviour {
         cost = newCard.mana;
         atk = newCard.attack;
         hp = newCard.hp;
+        state = CardState.None;
+    }
+
+    public void DeckManagerLink(DeckManager deckMgr)
+    {
+        deckManager = deckMgr;
     }
 
     public void SetAtk(int value)
