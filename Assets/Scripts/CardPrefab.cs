@@ -64,8 +64,15 @@ public class CardPrefab : MonoBehaviour
             CardHp.text = "";
         }
 
-        CardPhoto.material = (Material)Resources.Load("Lobby");
-        // CardPhoto.material = (Material)Resources.Load(newCard.prefabPath);
+        if (newCard.prefabPath == "")
+        {
+            CardPhoto.material = (Material)Resources.Load("Lobby");
+        }
+        else 
+        {
+            CardPhoto.material = (Material)Resources.Load(newCard.prefabPath);
+        }
+        
         CardName.text = newCard.name;
         CardDesc.text = newCard.description;
         CardCost.text = newCard.mana.ToString();
